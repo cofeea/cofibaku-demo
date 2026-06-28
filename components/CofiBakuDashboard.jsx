@@ -491,7 +491,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
   const chainNet = BRANCHES.reduce((s, b) => s + b.may.net, 0);
   const monthShort = pick(CURRENT_MONTH, lang).split(" ")[0];
   const centralB = BRANCHES.find((b) => b.id === "nizami");
-  const cityB = BRANCHES.find((b) => b.id === "citypoint");
+  const cityB = BRANCHES.find((b) => b.id === "bineqedi");
 
   const tabs = [
     { id: "pulse",     icon: Coffee,          label: t.tab_pulse },
@@ -565,7 +565,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
       {/* milestone */}
       <div style={{ background: C.sageSoft, border: "1px solid #C9D2A8", borderRadius: 14, padding: "10px 15px", fontSize: 12.5, color: "#4F5A30", display: "flex", gap: 9, alignItems: "center", marginBottom: "1.25rem", lineHeight: 1.5 }}>
         <TrendingUp size={16} style={{ flexShrink: 0, color: C.sage }} />
-        <span><strong>{t.milestone_title}</strong> {tfmt(t.milestone_body, { net: "+" + fmtAZN(centralB.may.net, false), gap: fmtAZN(Math.abs(cityB.may.net), false) })}</span>
+        <span><strong>{t.milestone_title}</strong> {tfmt(t.milestone_body, { net: "+" + fmtAZN(centralB.may.net, false), gap: fmtAZN(Math.abs(cityB?.may?.net ?? 0), false) })}</span>
       </div>
 
       {/* tabs */}
@@ -1003,3 +1003,4 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
     </div>
   );
 }
+
