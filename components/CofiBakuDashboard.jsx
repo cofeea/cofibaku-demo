@@ -127,24 +127,21 @@ function mergeImportedData(staticData, dash) {
 
   // ── MONTHLY_CLIENTS: rebuild from POS unique cards per month ──
   let MONTHLY_CLIENTS = staticData.MONTHLY_CLIENTS;
-  const adyPos     = pos["Binəqədi"]?.monthly;
-  const cityPos    = pos["Binəqədi"]?.monthly;
-  const portPos    = pos["İçərişəhər"]?.monthly;
-  const centralPos = pos["Nizami"]?.monthly;
-  if (adyPos?.length || cityPos?.length || portPos?.length || centralPos?.length) {
+  const bineqediPos = pos["Binəqədi"]?.monthly;
+  const portPos     = pos["İçərişəhər"]?.monthly;
+  const centralPos  = pos["Nizami"]?.monthly;
+  if (bineqediPos?.length || portPos?.length || centralPos?.length) {
     const keys = [...new Set([
-      ...(adyPos||[]).map(m=>m.month),
-      ...(cityPos||[]).map(m=>m.month),
+      ...(bineqediPos||[]).map(m=>m.month),
       ...(portPos||[]).map(m=>m.month),
       ...(centralPos||[]).map(m=>m.month),
     ])];
     const findCards = (arr, label) => arr?.find(m=>m.month===label)?.uniqueCards || 0;
     MONTHLY_CLIENTS = keys.map(label => ({
       m: label.split(" ")[0],
-      bineqedi:      findCards(bineqediPos, label),
-      citypoint:findCards(cityPos,    label),
-      port:     findCards(portPos,    label),
-      nizami:  findCards(centralPos, label),
+      icerisheher: findCards(portPos,     label),
+      nizami:      findCards(centralPos,  label),
+      bineqedi:    findCards(bineqediPos, label),
     }));
   }
 
@@ -676,11 +673,10 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
                 <Area type="monotone" dataKey="icerisheher" name="İçərişəhər" stroke={C.gold} fill="url(#bgza)" strokeWidth={2.5} dot={false} />
                 <Area type="monotone" dataKey="nizami" name="Nizami" stroke={C.rattan} fill="url(#bgcp)" strokeWidth={2.5} dot={false} />
                 <Area type="monotone" dataKey="bineqedi" name="Binəqədi" stroke={C.clay} fill="url(#bgci)" strokeWidth={2.5} dot={false} />
-                <Area type="monotone" dataKey="bineqedi" name="Binəqədi" stroke="#7C8AA0" fill="url(#bgad)" strokeWidth={2.5} dot={false} />
               </AreaChart>
             </ResponsiveContainer>
             <div style={{ display: "flex", gap: 16, fontSize: 11.5, color: C.inkSoft, marginTop: 6 }}>
-              {[["İçərişəhər", C.gold], ["Nizami", C.rattan], ["Binəqədi", C.clay], ["Binəqədi", "#7C8AA0"]].map(([n, c]) => (
+              {[["İçərişəhər", C.gold], ["Nizami", C.rattan], ["Binəqədi", C.clay]].map(([n, c]) => (
                 <span key={n}><span style={{ display: "inline-block", width: 9, height: 9, borderRadius: "50%", background: c, marginRight: 5 }} />{n}</span>
               ))}
             </div>
@@ -833,7 +829,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
               <thead>
                 <tr style={{ borderBottom: `1px solid ${C.line}` }}>
-                  {[{ l: t.th_metric, left: true }, { l: t.th_benchmark }, { l: "İçərişəhər" }, { l: "Nizami" }, { l: "Binəqədi" }, { l: "Binəqədi" }, { l: t.th_insight, left: true }].map((h, i) => (
+                  {[{ l: t.th_metric, left: true }, { l: t.th_benchmark }, { l: "İçərişəhər" }, { l: "Nizami" }, { l: "Binəqədi" }, { l: t.th_insight, left: true }].map((h, i) => (
                     <th key={i} style={{ textAlign: h.left ? "left" : "center", padding: "7px 10px", fontWeight: 600, color: C.inkSoft, fontSize: 11 }}>{h.l}</th>
                   ))}
                 </tr>
@@ -852,7 +848,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
                     <tr key={ri} style={{ borderBottom: `1px solid ${C.line}` }}>
                       <td style={{ padding: "8px 10px", fontWeight: 600 }}>{pick(r.metric, lang)}</td>
                       <td style={{ padding: "8px 10px", textAlign: "center", color: C.inkSoft }}>{r.bench}</td>
-                      {cell(r.zarifa, "z")}{cell(r.central, "c")}{cell(r.city, "p")}{r.ady != null && cell(r.ady, "a")}
+                      {cell(r.icerisheher, "i")}{cell(r.nizami, "n")}{cell(r.bineqedi, "b")}
                       <td style={{ padding: "8px 10px", fontSize: 11, color: C.inkSoft, maxWidth: 180 }}>{pick(r.note, lang)}</td>
                     </tr>
                   );
@@ -907,14 +903,13 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
                   <XAxis dataKey="m" tickFormatter={(m) => monthAbbr(m, lang)} tick={{ fontSize: 10, fill: C.inkSoft }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fontSize: 10, fill: C.inkSoft }} axisLine={false} tickLine={false} />
                   <Tooltip content={<ChartTip />} labelFormatter={(m) => monthAbbr(m, lang)} />
-                  <Bar dataKey="port" name="İçərişəhər" stackId="a" fill={C.sage} maxBarSize={40} />
+                  <Bar dataKey="icerisheher" name="İçərişəhər" stackId="a" fill={C.sage} maxBarSize={40} />
                   <Bar dataKey="nizami" name="Nizami" stackId="a" fill={C.rattan} maxBarSize={40} />
-                  <Bar dataKey="citypoint" name="Binəqədi" stackId="a" fill={C.clay} maxBarSize={40} />
-                  <Bar dataKey="bineqedi" name="Binəqədi" stackId="a" fill="#7C8AA0" radius={[3,3,0,0]} maxBarSize={40} />
+                  <Bar dataKey="bineqedi" name="Binəqədi" stackId="a" fill={C.clay} radius={[3,3,0,0]} maxBarSize={40} />
                 </BarChart>
               </ResponsiveContainer>
               <div style={{ display: "flex", gap: 14, fontSize: 11, color: C.inkSoft, marginTop: 6 }}>
-                {[["İçərişəhər", C.sage], ["Nizami", C.rattan], ["Binəqədi", C.clay], ["Binəqədi", "#7C8AA0"]].map(([n,c]) => (
+                {[["İçərişəhər", C.sage], ["Nizami", C.rattan], ["Binəqədi", C.clay]].map(([n,c]) => (
                   <span key={n}><span style={{ display:"inline-block", width:8, height:8, borderRadius:2, background:c, marginRight:4 }}/>{n}</span>
                 ))}
                 <span style={{ marginLeft: "auto", fontSize: 10 }}>{t.lbl_card_only}</span>
