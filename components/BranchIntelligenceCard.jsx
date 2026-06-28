@@ -26,10 +26,9 @@ const AVG_WD = 20.08; // AZ national average working days per month
 const CALENDAR_DAYS = 30.44; // avg calendar days per month
 
 const ID_TO_CTX = {
-  zarifa:    "Zarifa (Port)",
-  central:   "Central Park",
-  citypoint: "City Point",
-  ady:       "ADY",
+  icerisheher: "İçərişəhər",
+  nizami:      "Nizami",
+  bineqedi:    "Binəqədi",
 };
 
 // ── i18n ─────────────────────────────────────────────────────────────────
@@ -219,7 +218,7 @@ function buildInsight(branchId, analysis, forecast, t) {
   const perDayLabel = calSens === "working_days" ? t.perWd : t.perDay;
 
   // Build insight based on branch type
-  if (branchId === "zarifa") {
+  if (branchId === "icerisheher") {
     if (f1Month) {
       return {
         az: `F1 GP (${f1Month.fullLabel}): Zarifa üçün gözlənilən əlavə gəlir ₼${fmt(f1Month.expected - f1Month.base)}. Trend ₼${fmt(trend)}/gün — F1 həftəsonu (4 gün, ~3× surge) bu rəqəmi dəfələrlə artırır. Kadr, stok, uzadılmış iş saatını elə indi planla.`,
@@ -234,7 +233,7 @@ function buildInsight(branchId, analysis, forecast, t) {
     };
   }
 
-  if (branchId === "citypoint") {
+  if (branchId === "bineqedi") {
     const calNote = ctxMonths.length
       ? { az:`${keyLabel(ctxMonths[0].key, true)} aydakı düşüş ${ctxMonths[0].wd} iş günündən (Novruz/bayram) qaynaqlanır — ₼${fmt(ctxMonths[0].rpd || 0)}/iş günü normaldır.`, ru:`Спад в ${keyLabel(ctxMonths[0].key, true)} вызван ${ctxMonths[0].wd} рабочими днями (праздники), ₼${fmt(ctxMonths[0].rpd || 0)}/раб. день — норма.`, en:`The dip in ${keyLabel(ctxMonths[0].key, true)} was ${ctxMonths[0].wd} working days (holidays), not lost demand — ₼${fmt(ctxMonths[0].rpd || 0)}/day is normal.` }
       : null;
@@ -245,7 +244,7 @@ function buildInsight(branchId, analysis, forecast, t) {
     };
   }
 
-  if (branchId === "central") {
+  if (branchId === "nizami") {
     return {
       az: `Central Park parkın yanındadır, havadan asılıdır. İyar–İyun mülayim mövsümü — pik dövr. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)} gözlənilir.` : ""}`,
       ru: `Central Park у парка, зависит от погоды. Пик — май–июнь. ${topMonth ? `${topMonth.fullLabel}: ожидается ₼${fmt(topMonth.expected)}.` : ""}`,
@@ -253,7 +252,7 @@ function buildInsight(branchId, analysis, forecast, t) {
     };
   }
 
-  if (branchId === "ady") {
+  if (false) { // removed
     return {
       az: `ADY qatar stansiyasındadır — 7 gün stabil. İş günləri trafiki az dəyişdirir. F1 (Sen) turist axını artıracaq. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)} gözlənilir.` : ""}`,
       ru: `ADY — вокзал, стабильно 7 дней. В сентябре (F1) ожидается рост туристов. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)}.` : ""}`,
