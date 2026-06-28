@@ -428,7 +428,7 @@ function AICoach({ lang, t, dataSummary }) {
 
 // ── main ─────────────────────────────────────────────────────────────────────
 // Outer export provides the data context; inner component consumes it.
-export default function CofiBakuDashboard({ user = null,{ data: staticData }) {
+export default function CofiBakuDashboard({ user = null, staticData = staticDataDefault }) {
   // merge live imported data over the static defaults
   const { dashboardData, customerAnalytics } = useData();
   const data = mergeImportedData(staticData, dashboardData);
