@@ -116,7 +116,7 @@ function mergeImportedData(staticData, dash) {
   let MONTHLY_TREND = staticData.MONTHLY_TREND;
   if (dash.monthlyTrend?.length) {
     MONTHLY_TREND = dash.monthlyTrend.map(row => {
-      const e = { m: row.month.split(" ")[0] }; // "Nov 2025" → "Nov"
+      const e = { m: (row.m || row.month || "").split(" ")[0] }; // "Nov 2025" → "Nov"
       for (const b of BRANCHES) {
         const ctx = ID_TO_CTX[b.id];
         e[TREND_KEY[b.id]] = Math.round(row[ctx] || 0);
