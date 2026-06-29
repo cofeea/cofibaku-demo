@@ -544,12 +544,12 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
         <div>
           <Eyebrow>{t.ops} · {pick(CURRENT_MONTH, lang)}</Eyebrow>
           <div style={{
-            fontSize: 38, fontWeight: 600, letterSpacing: ".18em", color: C.gold, lineHeight: 1.05, marginTop: 6,
-            textShadow: `0 0 22px ${C.goldGlow}77, 0 0 6px ${C.goldGlow}66`,
-          }}>COFIESTO</div>
+            fontSize: 38, fontWeight: 600, letterSpacing: ".12em", color: "#1B3A6B", lineHeight: 1.05, marginTop: 6,
+            textShadow: `0 2px 8px rgba(27,58,107,0.25)`,
+          }}>☕ CoffeeLea</div>
           <div style={{
             height: 5, width: 230, marginTop: 10, borderRadius: 3,
-            background: `linear-gradient(90deg, ${C.sage}, #8a9659 60%, ${C.sage})`, boxShadow: `0 0 14px ${C.sage}66`,
+            background: `linear-gradient(90deg, #1B3A6B, #CDA04B 60%, #1B3A6B)`, boxShadow: `0 0 14px rgba(27,58,107,0.3)`,
           }} />
         </div>
         <div style={{ textAlign: "right" }}>
@@ -794,7 +794,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
                 <div key={m} style={{ marginBottom: 8, background: growthMonth === m ? `${C.gold}12` : "transparent", margin: "0 -4px 8px", padding: "4px 4px" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, marginBottom: 3 }}>
                     <span style={{ color: C.inkSoft, fontWeight: growthMonth === m ? 600 : 400 }}>{monthAbbr(m, lang)}</span>
-                    <span style={{ color: C.ink }}>₼{(gd.rev[i]/1000).toFixed(1)}k · {gd.txn[i].toLocaleString()} {lang === "az" ? "əml" : lang === "ru" ? "опер" : "txn"}</span>
+                    <span style={{ color: C.ink }}>₼{(gd.rev[i]/1000).toFixed(1)}k · {(gd.txn?.[i] ?? 0).toLocaleString()} {lang === "az" ? "əml" : lang === "ru" ? "опер" : "txn"}</span>
                   </div>
                   <div style={{ height: 5, background: C.track, borderRadius: 3 }}>
                     <div style={{ height: 5, width: `${Math.round(gd.rev[i] / Math.max(...gd.rev) * 100)}%`, background: growthMonth === m ? C.gold : C.rattan, borderRadius: 3 }} />
@@ -986,8 +986,8 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
 
       {/* footer */}
       <div style={{ textAlign: "center", fontSize: 11, color: C.inkSoft, marginTop: 18, letterSpacing: ".04em" }}>
-        COFIESTO · Baku · {t.footer_data}
-        <span style={{ margin: "0 8px", opabineqedi: 0.5 }}>·</span>
+        ☕ CoffeeLea · Baku · {t.footer_data}
+        <span style={{ margin: "0 8px", opacity: 0.5 }}>·</span>
         <button
           onClick={async () => { await fetch("/api/logout", { method: "POST" }); window.location.reload(); }}
           style={{ background: "none", border: "none", color: C.inkSoft, cursor: "pointer", fontSize: 11, textDecoration: "underline", padding: 0, letterSpacing: ".04em" }}
