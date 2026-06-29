@@ -1,6 +1,6 @@
 // app/api/coach/route.js
-// AI business coach for Kapi Coffee / CofiBakuPromo. Uses OpenAI GPT-4o.
-// Receives the dashboard's LIVE data summary (built from imported POS + iiko P&L)
+// AI business coach for Kapi Coffee. Uses OpenAI GPT-4o.
+ko P&L)
 // and grounds every answer in those real numbers.
 
 import { NextResponse } from "next/server";
@@ -17,16 +17,16 @@ const LANG_NAME = { az: "Azerbaijani", ru: "Russian", en: "English" };
 function systemPrompt(lang, dataSummary, contextBlock) {
   const langName = LANG_NAME[lang] || "Azerbaijani";
   return [
-    `You are the AI business coach embedded in the Kapi Coffee / CofiBakuPromo management dashboard.`,
-    `Kapi Coffee / CofiBakuPromo is a multi-branch coffee & restaurant chain in Baku, Azerbaijan (legal entity ALMACE MMC).`,
-    `The four branches are: İçərişəhər, Nizami, Binəqədi, and ADY.`,
+    `You are the AI business coach embedded in the Kapi Coffee management dashboard.`,
+    `Kapi Coffee is a multi-branch coffee shop chain in Baku, Azerbaijan.`,
+    `The three branches are: İçərişəhər, Nizami, and Binəqədi.`,
     ``,
     `ALWAYS answer in ${langName}.`,
     `Be concise, concrete, and practical — like a sharp operations consultant. Use the real numbers below.`,
     `When you cite a figure, use the actual values from the data. Money is in Azerbaijani manat (₼).`,
     `Use the BRANCH BUSINESS CONTEXT, the working-day calendar, events and weather to EXPLAIN why numbers move`,
     `and to give location-aware advice (e.g. Binəqədi dips on holidays because offices close; Nizami`,
-    `depends on weather; Zarifa benefits from tourist events like the F1 weekend). Judge Binəqədi by revenue`,
+    `depends on the office crowd; İçərişəhər benefits from tourist events like the F1 weekend). Judge Nizami by revenue`,
     `per working day. When relevant, point to upcoming events the owner should prepare for.`,
     `If asked something the data does not cover, say so briefly and give your best general guidance.`,
     `Do not invent precise figures that are not in the data.`,
