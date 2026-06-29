@@ -221,15 +221,15 @@ function buildInsight(branchId, analysis, forecast, t) {
   if (branchId === "icerisheher") {
     if (f1Month) {
       return {
-        az: `F1 GP (${f1Month.fullLabel}): Zarifa üçün gözlənilən əlavə gəlir ₼${fmt(f1Month.expected - f1Month.base)}. Trend ₼${fmt(trend)}/gün — F1 həftəsonu (4 gün, ~3× surge) bu rəqəmi dəfələrlə artırır. Kadr, stok, uzadılmış iş saatını elə indi planla.`,
-        ru: `F1 GP (${f1Month.fullLabel}): ожидаемая надбавка Zarifa ₼${fmt(f1Month.expected - f1Month.base)}. Тренд ₼${fmt(trend)}/день; уикенд F1 (4 дня, ~3×) многократно усиливает результат. Персонал, запасы и часы работы планируй уже сейчас.`,
-        en: `F1 GP (${f1Month.fullLabel}): Zarifa is modelled to earn +₼${fmt(f1Month.expected - f1Month.base)} extra. Trend ₼${fmt(trend)}/day; the race weekend (4 days, ~3× surge) amplifies this significantly. Plan staffing, stock and extended hours now.`,
+        az: `F1 GP (${f1Month.fullLabel}): İçərişəhər üçün gözlənilən əlavə gəlir ₼${fmt(f1Month.expected - f1Month.base)}. Trend ₼${fmt(trend)}/gün — F1 həftəsonu (4 gün, ~3× surge) bu rəqəmi dəfələrlə artırır. Kadr, stok, uzadılmış iş saatını elə indi planla.`,
+        ru: `F1 GP (${f1Month.fullLabel}): ожидаемая надбавка İçərişəhər ₼${fmt(f1Month.expected - f1Month.base)}. Тренд ₼${fmt(trend)}/день; уикенд F1 (4 дня, ~3×) многократно усиливает результат. Персонал, запасы и часы работы планируй уже сейчас.`,
+        en: `F1 GP (${f1Month.fullLabel}): İçərişəhər is modelled to earn +₼${fmt(f1Month.expected - f1Month.base)} extra. Trend ₼${fmt(trend)}/day; the race weekend (4 days, ~3× surge) amplifies this significantly. Plan staffing, stock and extended hours now.`,
       };
     }
     return {
-      az: `Zarifa gündəlik ₼${fmt(trend)} bazasında işləyir. Ən güclü gələcək ay ${topMonth?.fullLabel} — ₼${fmt(topMonth?.expected || 0)} gözlənilir.`,
-      ru: `Zarifa работает на базе ₼${fmt(trend)}/день. Лучший месяц вперёд — ${topMonth?.fullLabel}, ожидается ₼${fmt(topMonth?.expected || 0)}.`,
-      en: `Zarifa runs on a ₼${fmt(trend)}/day baseline. Strongest upcoming month is ${topMonth?.fullLabel} — ₼${fmt(topMonth?.expected || 0)} expected.`,
+      az: `İçərişəhər gündəlik ₼${fmt(trend)} bazasında işləyir. Ən güclü gələcək ay ${topMonth?.fullLabel} — ₼${fmt(topMonth?.expected || 0)} gözlənilir.`,
+      ru: `İçərişəhər работает на базе ₼${fmt(trend)}/день. Лучший месяц вперёд — ${topMonth?.fullLabel}, ожидается ₼${fmt(topMonth?.expected || 0)}.`,
+      en: `İçərişəhər runs on a ₼${fmt(trend)}/day baseline. Strongest upcoming month is ${topMonth?.fullLabel} — ₼${fmt(topMonth?.expected || 0)} expected.`,
     };
   }
 
@@ -238,25 +238,25 @@ function buildInsight(branchId, analysis, forecast, t) {
       ? { az:`${keyLabel(ctxMonths[0].key, true)} aydakı düşüş ${ctxMonths[0].wd} iş günündən (Novruz/bayram) qaynaqlanır — ₼${fmt(ctxMonths[0].rpd || 0)}/iş günü normaldır.`, ru:`Спад в ${keyLabel(ctxMonths[0].key, true)} вызван ${ctxMonths[0].wd} рабочими днями (праздники), ₼${fmt(ctxMonths[0].rpd || 0)}/раб. день — норма.`, en:`The dip in ${keyLabel(ctxMonths[0].key, true)} was ${ctxMonths[0].wd} working days (holidays), not lost demand — ₼${fmt(ctxMonths[0].rpd || 0)}/day is normal.` }
       : null;
     return {
-      az: `City Point iş günü başına ₼${fmt(trend)} sabit baza göstərir. ${calNote?.az||""} ${topMonth?.wd >= 22 ? `${topMonth.fullLabel} (${topMonth.wd} iş günü) — bu ilin ən məhsuldar ayı: ₼${fmt(topMonth.expected)} gözlənilir.` : ""}`,
-      ru: `City Point: стабильная база ₼${fmt(trend)}/раб. день. ${calNote?.ru||""} ${topMonth?.wd >= 22 ? `${topMonth.fullLabel} (${topMonth.wd} дней) — лучший месяц года: ₼${fmt(topMonth.expected)}.` : ""}`,
-      en: `City Point shows a stable ₼${fmt(trend)}/working day baseline. ${calNote?.en||""} ${topMonth?.wd >= 22 ? `${topMonth.fullLabel} (${topMonth.wd} days) — strongest month this year: ₼${fmt(topMonth.expected)} expected.` : ""}`,
+      az: `Binəqədi iş günü başına ₼${fmt(trend)} sabit baza göstərir. ${calNote?.az||""} ${topMonth?.wd >= 22 ? `${topMonth.fullLabel} (${topMonth.wd} iş günü) — bu ilin ən məhsuldar ayı: ₼${fmt(topMonth.expected)} gözlənilir.` : ""}`,
+      ru: `Binəqədi: стабильная база ₼${fmt(trend)}/раб. день. ${calNote?.ru||""} ${topMonth?.wd >= 22 ? `${topMonth.fullLabel} (${topMonth.wd} дней) — лучший месяц года: ₼${fmt(topMonth.expected)}.` : ""}`,
+      en: `Binəqədi shows a stable ₼${fmt(trend)}/working day baseline. ${calNote?.en||""} ${topMonth?.wd >= 22 ? `${topMonth.fullLabel} (${topMonth.wd} days) — strongest month this year: ₼${fmt(topMonth.expected)} expected.` : ""}`,
     };
   }
 
   if (branchId === "nizami") {
     return {
-      az: `Central Park parkın yanındadır, havadan asılıdır. İyar–İyun mülayim mövsümü — pik dövr. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)} gözlənilir.` : ""}`,
-      ru: `Central Park у парка, зависит от погоды. Пик — май–июнь. ${topMonth ? `${topMonth.fullLabel}: ожидается ₼${fmt(topMonth.expected)}.` : ""}`,
-      en: `Central Park is weather-driven; peak is May–June mild season. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)} expected.` : ""}`,
+      az: `Nizami küçəsindədir, ofis işçiləri və alış-veriş edənlər üçün əlverişlidir. Axşam saatları pik dövrdür. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)} gözlənilir.` : ""}`,
+      ru: `Nizami на торговой улице, аудитория — офисные работники и шопперы. Пик — вечерние часы. ${topMonth ? `${topMonth.fullLabel}: ожидается ₼${fmt(topMonth.expected)}.` : ""}`,
+      en: `Nizami is on the main shopping street; office workers and shoppers drive traffic. Evening hours are peak. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)} expected.` : ""}`,
     };
   }
 
   if (false) { // removed
     return {
-      az: `ADY qatar stansiyasındadır — 7 gün stabil. İş günləri trafiki az dəyişdirir. F1 (Sen) turist axını artıracaq. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)} gözlənilir.` : ""}`,
-      ru: `ADY — вокзал, стабильно 7 дней. В сентябре (F1) ожидается рост туристов. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)}.` : ""}`,
-      en: `ADY is a railway station — steady 7 days a week. September F1 will boost tourist traffic. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)} expected.` : ""}`,
+      az: `Binəqədi sakinlərə xidmət göstərir — əsas trafik iş günlərindədir. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)} gözlənilir.` : ""}`,
+      ru: `Binəqədi обслуживает местных жителей — трафик стабилен в будни. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)}.` : ""}`,
+      en: `Binəqədi serves local residents — steady weekday traffic. ${topMonth ? `${topMonth.fullLabel}: ₼${fmt(topMonth.expected)} expected.` : ""}`,
     };
   }
   return null;
