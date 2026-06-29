@@ -539,6 +539,30 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
         </div>
       </div>
 
+      {/* DEMO BANNER */}
+      <div style={{
+        background: "linear-gradient(90deg, #1B3A6B08, #CDA04B18, #1B3A6B08)",
+        border: "1px solid #CDA04B55",
+        borderRadius: 10,
+        padding: "8px 14px",
+        marginBottom: "1rem",
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+        fontSize: 12,
+        color: "#5B4A2A",
+        lineHeight: 1.4,
+      }}>
+        <span style={{ fontSize: 16, flexShrink: 0 }}>🎯</span>
+        <span>
+          {{
+            az: <><strong>Demo versiya</strong> — məlumatlar və biznes konteksti sizin şirkətinizə uyğunlaşdırılacaq.</>,
+            ru: <><strong>Демо-версия</strong> — данные и бизнес-контекст будут адаптированы под вашу компанию.</>,
+            en: <><strong>Demo version</strong> — data and business context will be customised for your company.</>,
+          }}[lang]}
+        </span>
+      </div>
+
       {/* HERO */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16, marginBottom: 14 }}>
         <div>
