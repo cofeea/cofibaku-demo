@@ -39,7 +39,7 @@ async function processPnL(rows, fileName) {
   const tsv = rowsToTSV(rows.slice(0, 120));
 
   const result = await callGPT(
-    `You are a financial data extraction AI for restaurant P&L reports from iiko POS.
+    `You are a financial data extraction AI for coffee shop P&L reports.
 Extract structured data and return ONLY valid JSON — no markdown, no explanation.`,
 
     `File: "${fileName}"
@@ -63,7 +63,7 @@ INSTRUCTIONS:
   return it as a negative number (-606.83). NEVER convert a loss to positive — a branch
   can be unprofitable; do not "fix" the sign.
 - Detect branch from content or filename.
-  Valid: "Zarifa (Port)", "Central Park", "City Point", "ADY"
+  Valid: "İçərişəhər", "Nizami", "Binəqədi"
 - Only include months with non-zero revenue.
 
 Return ONLY this JSON:
@@ -83,7 +83,7 @@ Return ONLY this JSON:
 
   // Defensive sign correction: GPT sometimes strips the "-" from a loss
   // (e.g. -606.83 → 606.83). Operating profit (grossProfit − totalExpenses) cannot be
-  // negative while net profit is positive (this iiko report has no other income).
+  // negative while net profit is positive (this report has no other income).
   // When that impossible combination appears, the net is a loss → restore the sign.
   if (result?.monthly?.length) {
     for (const m of result.monthly) {
@@ -112,7 +112,7 @@ ${JSON.stringify(monthly, null, 2)}
 
 INSTRUCTIONS:
 - Confirm or correct branch (must be one of):
-    "Zarifa (Port)", "Central Park", "City Point", "ADY"
+    "İçərişəhər", "Nizami", "Binəqədi"
 - Confirm or correct bank (must be one of):
     "ABB", "Kapital", "Pasa"
 - Use file name and content to detect if auto-detect was wrong.
