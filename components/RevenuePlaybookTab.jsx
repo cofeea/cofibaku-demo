@@ -136,9 +136,9 @@ const ACTIONS = [
     title:{ az:"At-Risk müştəri reaktivasiyası", ru:"Реактивация ушедших клиентов", en:"At-Risk customer reactivation" },
     rev6mo_static:11720, difficulty:"medium", allBranches:true,
     dataInsight:{
-      az:(live)=>live?`${live.atRiskCount?.toLocaleString()||"3,387"} kart 2+ dəfə gəlib, amma 60+ gündür yoxdur. Bu müştərilər Cofiesto-nu tanıyır — yalnız bir siqnal lazımdır.`:"3,387 kart 2+ dəfə gəlib, 60+ gündür yoxdur.",
+      az:(live)=>live?`${live.atRiskCount?.toLocaleString()||"3,387"} kart 2+ dəfə gəlib, amma 60+ gündür yoxdur. Bu müştərilər Kapi Coffee-ni tanıyır — yalnız bir siqnal lazımdır.`:"3,387 kart 2+ dəfə gəlib, 60+ gündür yoxdur.",
       ru:(live)=>live?`${live.atRiskCount?.toLocaleString()||"3 387"} карт приходили 2+ раз, но отсутствуют 60+ дней.`:"3 387 карт были 2+ раза, но 60+ дней отсутствуют.",
-      en:(live)=>live?`${live.atRiskCount?.toLocaleString()||"3,387"} cards visited 2+ times but gone 60+ days. They know Cofiesto — just need a signal.`:"3,387 cards visited 2+ times but absent 60+ days.",
+      en:(live)=>live?`${live.atRiskCount?.toLocaleString()||"3,387"} cards visited 2+ times but gone 60+ days. They know Kapi Coffee — just need a signal.`:"3,387 cards visited 2+ times but absent 60+ days.",
     },
     action:{ az:"WhatsApp/SMS: 'Sizi çox görmədik — bu həftə gəlin, əlavə içki hədiyyədir.'", ru:"WhatsApp/SMS: «Давно не видели — зайдите, доп. напиток в подарок».", en:"WhatsApp/SMS: 'We miss you — come this week, extra drink on us.'" },
     steps:{ az:["At-Risk kart siyahısını al","WhatsApp Business mesajı göndər","Hər karta yalnız 1 mesaj","2 həftə sonra: neçəsi gəldi?"], ru:["Получи список","Отправь WhatsApp","1 сообщение на карту","Через 2 нед: сколько вернулось?"], en:["Pull At-Risk card list","Send WhatsApp Business","Max 1 per card","2 weeks later: how many returned?"] },
