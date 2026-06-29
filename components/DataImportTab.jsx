@@ -62,7 +62,7 @@ function findGaps(registry, allKeys) {
       const keys = srcKeys(src.monthly);
       if (!keys.has(latest)) {
         const last = [...keys].sort().pop() || null;
-        gaps.push({ id:`${b}::${bk}`, label:`${b === "İçərişəhər"?"Zarifa":b} / ${bk}`, type:"pos", last, missing:latest });
+        gaps.push({ id:`${b}::${bk}`, label:`${b} / ${bk}`, type:"pos", last, missing:latest });
       }
     }
     const pnl = registry[b]?.pnl;
@@ -70,7 +70,7 @@ function findGaps(registry, allKeys) {
       const keys = srcKeys(pnl.monthly);
       if (!keys.has(latest)) {
         const last = [...keys].sort().pop() || null;
-        gaps.push({ id:`${b}::pnl`, label:`${b === "İçərişəhər"?"Zarifa":b} / P&L`, type:"pnl", last, missing:latest });
+        gaps.push({ id:`${b}::pnl`, label:`${b} / P&L`, type:"pnl", last, missing:latest });
       }
     }
   }
@@ -89,15 +89,15 @@ function detectMeta(fileName) {
     .replace(/[_\-\s\.]/g,"");
 
   let branch = null;
-  if      (f.includes("ZARIFA"))                              branch = "İçərişəhər";
+  if      (f.includes("ZARIFA") || f.includes("ICERI") || f.includes("ICERISHEHER")) branch = "İçərişəhər";
   else if (f.includes("PORT") && !f.includes("REPORT"))       branch = "İçərişəhər";
   else if (f.includes("CENTRAL"))                             branch = "Nizami";
-  else if (f.includes("CITYPOINT")||(f.includes("CITY")&&f.includes("POINT"))) branch = "Binəqədi";
+  else if (f.includes("CITYPOINT")||f.includes("BINEQEDI")||(f.includes("CITY")&&f.includes("POINT"))) branch = "Binəqədi";
   else if (f.includes("CITY"))                                branch = "Binəqədi";
   else if (f.includes("Binəqədi"))                                 branch = "Binəqədi";
 
   let bank = null;
-  if      (f.includes("ABB") && !f.includes("COFIESTO"))     bank = "ABB";
+  if      (f.includes("ABB"))                                 bank = "ABB";
   else if (f.includes("KAPI") || f.includes("BIRBANK"))      bank = "Kapital";
   else if (f.includes("PASA") || f.includes("PASHA"))        bank = "Pasa";
 
@@ -108,7 +108,7 @@ function detectMeta(fileName) {
                         || f.includes("PASA") || f.includes("PASHA")
                         || f.includes("POS") || f.includes("STATEMENT")
                         || f.includes("TERMINAL");
-  const looksLikePnL  = f.includes("REPORT") || f.includes("COFIESTO")
+  const looksLikePnL  = f.includes("REPORT") || f.includes("PNL") || f.includes("P&L")
                         || f.includes("MENFEET") || f.includes("ZERER")
                         || f.includes("HESABAT") || f.includes("PROFIT")
                         || (f.includes("PL") && !looksLikeBank);
@@ -624,7 +624,7 @@ export default function DataImportTab({ theme={}, lang="en" }) {
             </ol>
             <div style={{marginTop:10,paddingTop:10,borderTop:`1px solid ${S.border}`,fontSize:11,color:S.muted}}>
               <span style={{fontWeight:600}}>{T.fileNames}</span>{" "}
-              <code style={{color:S.accent}}>ZARIFA / PORT</code> ·{" "}
+              <code style={{color:S.accent}}>ICERISHEHER / NIZAMI</code> ·{" "}
               <code style={{color:S.accent}}>CENTRAL</code> ·{" "}
               <code style={{color:S.accent}}>CITY POINT</code> ·{" "}
               <code style={{color:S.accent}}>ADY</code>{"  |  "}
@@ -748,7 +748,7 @@ export default function DataImportTab({ theme={}, lang="en" }) {
                 </thead>
                 <tbody>
                   {BRANCHES.flatMap(b=>{
-                    const shortB = b==="İçərişəhər"?"Zarifa":b;
+                    const shortB = b;
                     const rows = [];
                     // P&L row
                     const pnl = registry[b]?.pnl;
