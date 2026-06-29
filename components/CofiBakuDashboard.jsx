@@ -119,7 +119,7 @@ function mergeImportedData(staticData, dash) {
       const e = { m: (row.m || row.month || "").split(" ")[0] }; // "Nov 2025" → "Nov"
       for (const b of BRANCHES) {
         const ctx = ID_TO_CTX[b.id];
-        e[TREND_KEY[b.id]] = Math.round(row[ctx] || 0);
+        e[TREND_KEY[b.id]] = Math.round(row[b.id] || row[ctx] || 0); // b.id=icerisheher (from computeDashboardData)
       }
       return e;
     });
