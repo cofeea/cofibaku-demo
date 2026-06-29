@@ -113,7 +113,9 @@ function computeDashboardData(registry) {
       trendMap[m.month][k] = m.revenue;
     }
   }
-  result.monthlyTrend = Object.values(trendMap).sort((a,b)=>a.m.localeCompare(b.m));
+  const _MN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const _toKey=(m)=>{const[mon,yr]=(m||"").split(" ");return `${yr||"0"}-${String(_MN.findIndex(n=>mon?.startsWith(n))+1).padStart(2,"0")}`;};
+  result.monthlyTrend = Object.values(trendMap).sort((a,b)=>_toKey(a.m).localeCompare(_toKey(b.m)));
 
   // Network
   let netRev=0, netTxn=0; const netCards = new Set();
