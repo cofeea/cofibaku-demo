@@ -156,7 +156,7 @@ function buildGrowthData(dash) {
 
   // POS branches that have data
   const branchPos = {
-    ADY: pos["Binəqədi"], "Binəqədi": pos["Binəqədi"], "Nizami": pos["Nizami"], Port: pos["İçərişəhər"],
+    "Binəqədi": pos["Binəqədi"], "Nizami": pos["Nizami"], "İçərişəhər": pos["İçərişəhər"],
   };
   const active = Object.entries(branchPos).filter(([,v]) => v?.monthly?.length);
   if (!active.length) return null;
@@ -211,7 +211,7 @@ function buildGrowthData(dash) {
   const allMom = allRev.map((v,i)=> i===0?null:(allRev[i-1]>0?Math.round((v-allRev[i-1])/allRev[i-1]*1000)/10:null));
   out.all = { rev:allRev, txn:allTxn, avg:allAvg, mom:allMom };
 
-  // fill each branch that has data (ADY / City Point / Central Park / Port)
+  // fill each branch that has data (İçərişəhər / Nizami / Binəqədi)
   for (const [name] of active) out[name] = perBranch[name];
 
   return out;
@@ -416,8 +416,8 @@ function AICoach({ lang, t, dataSummary }) {
       </div>
 
       <style>{`
-        @keyframes cfdot { from { opabineqedi: .3 } to { opabineqedi: 1 } }
-        @keyframes cfpulse { 0%, 100% { opabineqedi: 1 } 50% { opabineqedi: .55 } }
+        @keyframes cfdot { from { opacity: .3 } to { opacity: 1 } }
+        @keyframes cfpulse { 0%, 100% { opacity: 1 } 50% { opacity: .55 } }
       `}</style>
     </div>
   );
@@ -467,7 +467,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
   const GROWTH_DATA_STATIC = {
     months: ["Nov","Dec","Jan","Feb","Mar","Apr","May"],
     all:          { rev:[86233,75481,69163,63917,68092,89636,99033], txn:[7195,6614,6125,5609,5793,7951,8448], avg:[11.99,11.41,11.29,11.40,11.75,11.27,11.72], mom:[null,-12.5,-8.4,-7.6,6.5,31.6,10.5] },
-    ADY:          { rev:[15769,18698,15036,14246,13850,17058,17119], txn:[1537,1804,1488,1393,1420,1759,1718], avg:[10.26,10.36,10.10,10.23,9.75,9.70,9.96], mom:[null,18.6,-19.6,-5.3,-2.8,23.2,0.4] },
+    
     "Binəqədi": { rev:[22399,15220,14495,14441,14883,22442,29939], txn:[1787,1395,1277,1314,1250,2042,2440], avg:[12.53,10.91,11.35,10.99,11.91,10.99,12.27], mom:[null,-32.1,-4.8,-0.4,3.1,50.8,33.4] },
     Port:         { rev:[48876,42374,40272,35882,40108,51062,52954], txn:[3938,3492,3418,2960,3192,4223,4371], avg:[12.41,12.13,11.78,12.12,12.57,12.09,12.11], mom:[null,-13.3,-5.0,-10.9,11.8,27.3,3.7] },
   };
@@ -546,7 +546,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
           <div style={{
             fontSize: 38, fontWeight: 600, letterSpacing: ".12em", color: "#1B3A6B", lineHeight: 1.05, marginTop: 6,
             textShadow: `0 2px 8px rgba(27,58,107,0.25)`,
-          }}>☕ CoffeeLea</div>
+          }}>☕ CoffeeAnalytics</div>
           <div style={{
             height: 5, width: 230, marginTop: 10, borderRadius: 3,
             background: `linear-gradient(90deg, #1B3A6B, #CDA04B 60%, #1B3A6B)`, boxShadow: `0 0 14px rgba(27,58,107,0.3)`,
@@ -685,7 +685,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
           {/* ── CONTEXT INTELLIGENCE ── */}
           {(() => {
             // Build static monthly series for fallback (from MONTHLY_TREND)
-            const trendKey = { icerisheher:"icerisheher", nizami:"nizami", citypoint:"bineqedi", bineqedi:"bineqedi" }[selected];
+            const trendKey = { icerisheher:"icerisheher", nizami:"nizami", bineqedi:"bineqedi" }[selected];
             const MN_FULL = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
             const staticMonthly = MONTHLY_TREND.map((m, i) => {
               const mnIdx = MN_FULL.findIndex(n => m.m.startsWith(n.slice(0,3)));
@@ -716,7 +716,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
                   background: growthBranch === b ? C.ink : C.surface,
                   color: growthBranch === b ? "#fff" : C.inkSoft,
                 }}>
-                  {b === "all" ? (lang === "az" ? "Şəbəkə" : lang === "ru" ? "Сеть" : "Network") : (b === "Port" ? "İçərişəhər" : b)}
+                  {b === "all" ? (lang === "az" ? "Şəbəkə" : lang === "ru" ? "Сеть" : "Network") : b}
                 </button>
               ))}
             </div>
@@ -986,7 +986,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
 
       {/* footer */}
       <div style={{ textAlign: "center", fontSize: 11, color: C.inkSoft, marginTop: 18, letterSpacing: ".04em" }}>
-        ☕ CoffeeLea · Baku · {t.footer_data}
+        ☕ CoffeeAnalytics · Baku · {t.footer_data}
         <span style={{ margin: "0 8px", opacity: 0.5 }}>·</span>
         <button
           onClick={async () => { await fetch("/api/logout", { method: "POST" }); window.location.reload(); }}
