@@ -342,9 +342,9 @@ export default function BusinessSimulatorTab({ lang = "az" }) {
     setAiLoading(true); setAiText("");
     const ctx = sc.aiContext(params, branch==="all"?t.allBranches:(branch==="İçərişəhər"?"İçərişəhər":branch), result, "en");
     const prompts = {
-      az:`Cofiesto (Bakı) üçün biznes konsultantsan. Aşağıdakı simulasiyanı analiz et, 8-10 cümlə, Azərbaycanca, konkret rəqəmlərlə, riskləri də qeyd et.\n\n${ctx}`,
-      ru:`Ты бизнес-консультант для Cofiesto (Баку). Проанализируй симуляцию, 8–10 предложений, по-русски, конкретные цифры и риски.\n\n${ctx}`,
-      en:`You are a business consultant for Cofiesto (Baku). Analyse this simulation, 8–10 sentences in English, specific numbers, mention risks.\n\n${ctx}`,
+      az:`Kapi Coffee (Bakı) üçün biznes konsultantsan. Aşağıdakı simulasiyanı analiz et, 8-10 cümlə, Azərbaycanca, konkret rəqəmlərlə, riskləri də qeyd et.\n\n${ctx}`,
+      ru:`Ты бизнес-консультант для Kapi Coffee (Баку). Проанализируй симуляцию, 8–10 предложений, по-русски, конкретные цифры и риски.\n\n${ctx}`,
+      en:`You are a business consultant for Kapi Coffee (Baku). Analyse this simulation, 8–10 sentences in English, specific numbers, mention risks.\n\n${ctx}`,
     };
     try {
       const res = await fetch("/api/coach", {
@@ -403,9 +403,9 @@ export default function BusinessSimulatorTab({ lang = "az" }) {
         <div style={{ background:`${C.gold}18`, border:`1px solid ${C.gold}50`, borderRadius:10, padding:"10px 14px", marginBottom:14, fontSize:12, color:C.ink, lineHeight:1.55 }}>
           <strong style={{ color:C.gold }}>★ {lang==="az"?"Yeni ssenari — Cashback Proqramı":lang==="ru"?"Новый сценарий — программа кэшбэка":"New scenario — Cashback Program"}</strong>
           <span style={{ color:C.sub, marginLeft:8 }}>
-            {lang==="az"?"Cofiesto-nun loyallıq kartından maksimum faydalanmaq üçün optimal cashback faizini tapın.":
-             lang==="ru"?"Найдите оптимальный % кэшбэка для максимальной отдачи карты лояльности Cofiesto.":
-             "Find the optimal cashback rate to maximise returns from Cofiesto's loyalty card program."}
+            {lang==="az"?"Kapi Coffee-nin loyallıq kartından maksimum faydalanmaq üçün optimal cashback faizini tapın.":
+             lang==="ru"?"Найдите оптимальный % кэшбэка для Kapi Coffee Cofiesto.":
+             "Find the optimal cashback rate to maximise returns from Kapi Coffee's loyalty card program."}
           </span>
         </div>
       )}
