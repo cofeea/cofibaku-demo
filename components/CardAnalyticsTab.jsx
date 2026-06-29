@@ -6,7 +6,7 @@ import {
 import { useData } from "@/lib/DataContext";
 
 /* ============================================================
-   Cofiesto — POS / Card Analytics tab
+   Kapi Coffee — POS / Card Analytics tab
    Real bank POS data (ABB · Kapital/Birbank · Paşa)
    Period: Nov 2025 – May 2026 (full months) · card sales only
    Drop into the existing dashboard as a new tab.
@@ -37,7 +37,7 @@ const DATA = {
     nr:[[1103,142],[1173,215],[923,258],[857,267],[870,292],[1021,338],[1019,337]],
     chan:{"AZE Digər Bank kart":35831,"Kapital Bank kart":34123,"Xarici Bank kart":2714,"Birbank":691,"M10":593,"Digər tətbiqlər":36},
   },
-  "City Point": {
+  "Nizami_static": {
     rev:[22399,15220,14495,14441,14883,22442,29939], txn:[1787,1395,1277,1314,1250,2042,2440],
     avg:[12.53,10.91,11.35,10.99,11.91,10.99,12.27], cust:[1207,833,810,825,871,1198,1650],
     mom:[null,-32.1,-4.8,-0.4,3.1,50.8,33.4], avgMom:8.3,
@@ -49,9 +49,8 @@ const DATA = {
     banks:{ABB:40038,Kapital:53052,"Paşa":62797},
     nr:[[1187,21],[652,182],[591,220],[561,265],[608,264],[882,317],[1242,409]],
     chan:{"Kapital Bank kart":26106,"AZE Digər Bank kart":24399,"Xarici Bank kart":1696,"Birbank":460,"M10":235,"Digər tətbiqlər":156},
-    iiko:[6202,8233,7789,8148,5322,11631,7996], // iiko recorded total revenue (incomplete)
   },
-  Port: {
+  "Icerisheher_static": {
     rev:[48876,42374,40272,35882,40108,51062,52954], txn:[3938,3492,3418,2960,3192,4223,4371],
     avg:[12.41,12.13,11.78,12.12,12.57,12.09,12.11], cust:[2356,1973,2021,1878,2038,2515,2648],
     mom:[null,-13.3,-5.0,-10.9,11.8,27.3,3.7], avgMom:2.3,
@@ -69,7 +68,7 @@ const NET = { cust:22860, rev:557121, txn:48218, avg:11.55, multi:1502, single:2
 
 // ---- i18n ----
 const T = {
-  en:{ title:"Card Analytics", sub:"Real POS data · ABB · Kapital · Paşa · Nov 2025 – May 2026 · card sales only",
+  en:{ title:"Card Analytics", sub:"Sample card data · Nov 2025 – May 2026 · card sales only",
     network:"Network", cardRev:"Card revenue", txns:"Transactions", avgTicket:"Avg ticket", customers:"Unique cards",
     comp:"Comparable sales (month-on-month)", avgMoM:"avg / month", revTxn:"Revenue & transactions",
     loyalty:"Customer loyalty", repeatRate:"Repeat customers", visitsPer:"visits per card", freqDist:"Visit frequency",
@@ -78,9 +77,8 @@ const T = {
     when:"When customers pay", morning:"Morning", midday:"Midday", afternoon:"Afternoon", evening:"Evening",
     dow:"By weekday", acquirer:"By acquirer (bank)", channel:"Payment method (Kapital)",
     months:["Nov","Dec","Jan","Feb","Mar","Apr","May"], dows:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
-    iikoTitle:"Data-quality flag", iikoBody:"Bank-confirmed card revenue here is 1.8×–3.7× the total revenue recorded in iiko for this branch. Card can never exceed total, so the iiko revenue export for this location is incomplete — real sales are materially higher than the books show.",
     multi:"shop at 2+ branches", azn:"₼" },
-  ru:{ title:"Анализ карт", sub:"Реальные POS-данные · ABB · Kapital · Paşa · ноя 2025 – май 2026 · только карты",
+  ru:{ title:"Анализ карт", sub:"Пример данных по картам · ноя 2025 – май 2026 · только карты",
     network:"Сеть", cardRev:"Выручка по картам", txns:"Транзакции", avgTicket:"Средний чек", customers:"Уник. карты",
     comp:"Сопоставимые продажи (месяц к месяцу)", avgMoM:"в среднем / мес", revTxn:"Выручка и транзакции",
     loyalty:"Лояльность клиентов", repeatRate:"Повторные клиенты", visitsPer:"визитов на карту", freqDist:"Частота визитов",
@@ -89,9 +87,8 @@ const T = {
     when:"Когда платят клиенты", morning:"Утро", midday:"День", afternoon:"После обеда", evening:"Вечер",
     dow:"По дням недели", acquirer:"По банку-эквайеру", channel:"Способ оплаты (Kapital)",
     months:["ноя","дек","янв","фев","мар","апр","май"], dows:["Пн","Вт","Ср","Чт","Пт","Сб","Вс"],
-    iikoTitle:"Качество данных", iikoBody:"Подтверждённая банком выручка по картам в 1.8–3.7 раза выше общей выручки в iiko для этого филиала. Карты не могут превышать общую сумму — значит, выгрузка выручки из iiko неполная: реальные продажи существенно выше, чем в учёте.",
     multi:"в 2+ филиалах", azn:"₼" },
-  az:{ title:"Kart Analitikası", sub:"Real POS data · ABB · Kapital · Paşa · Noy 2025 – May 2026 · yalnız kart satışı",
+  az:{ title:"Kart Analitikası", sub:"Nümunə kart datası · Noy 2025 – May 2026 · yalnız kart satışı",
     network:"Şəbəkə", cardRev:"Kart gəliri", txns:"Əməliyyatlar", avgTicket:"Orta çek", customers:"Unikal kart",
     comp:"Müqayisəli satış (aydan-aya)", avgMoM:"orta / ay", revTxn:"Gəlir və əməliyyatlar",
     loyalty:"Müştəri loyallığı", repeatRate:"Təkrar müştəri", visitsPer:"kart başına ziyarət", freqDist:"Ziyarət tezliyi",
@@ -100,7 +97,6 @@ const T = {
     when:"Müştərilər nə vaxt ödəyir", morning:"Səhər", midday:"Günorta", afternoon:"Nahardan sonra", evening:"Axşam",
     dow:"Həftə günü üzrə", acquirer:"Bank (ekvayer) üzrə", channel:"Ödəniş üsulu (Kapital)",
     months:["Noy","Dek","Yan","Fev","Mar","Apr","May"], dows:["B.e","Ç.a","Çər","C.a","Cüm","Şən","Baz"],
-    iikoTitle:"Data keyfiyyəti xəbərdarlığı", iikoBody:"Burada bankla təsdiqlənmiş kart gəliri iiko-da bu filial üçün qeydə alınan ümumi gəlirdən 1.8–3.7 dəfə çoxdur. Kart gəliri ümumidən çox ola bilməz — yəni bu filialın iiko gəlir ixracı natamamdır: real satış uçotda görünəndən xeyli yüksəkdir.",
     multi:"2+ filialda alış-veriş edir", azn:"₼" },
 };
 
@@ -201,7 +197,7 @@ function keyToShort(key, lang) {
 }
 
 export default function CardAnalyticsTab({ lang = "az" }) {
-  const [branch, setBranch] = useState("Port");
+  const [branch, setBranch] = useState("icerisheher");
   const [selMonth, setSelMonth] = useState("all");
   const [winStart, setWinStart] = useState(0);   // window scroll offset (for 13+ months)
   const t = T[lang];
@@ -309,7 +305,7 @@ export default function CardAnalyticsTab({ lang = "az" }) {
       });
       if (!ids.length) ids = ["icerisheher", "nizami", "bineqedi"];
     } else {
-      ids = ["icerisheher", "nizami", "bineqedi"];   // static fallback (no Central Park data)
+      ids = ["icerisheher", "nizami", "bineqedi"];   // static fallback
     }
     return [...ids.map(id => ({ id, label: labelOf(id) })), { id: "__net", label: t.network }];
   })();
@@ -382,16 +378,16 @@ export default function CardAnalyticsTab({ lang = "az" }) {
           const netAvg   = imported ? imported.network.avgTicket    : NET.avg;
           const netCust  = imported ? imported.network.uniqueCards  : NET.cust;
           const netBranchIds = imported
-            ? ["ADY","City Point","Central Park","Port"].filter(b => {
+            ? ["icerisheher","nizami","bineqedi"].filter(b => {
                 const p = imported.pos?.[ID_TO_CTX[b]];
                 return p && (p.totalRevenue || p.monthly?.length);
               })
-            : ["ADY","City Point","Port"];
+            : ["icerisheher","nizami","bineqedi"];
           const netBars  = netBranchIds.map(b=>{
             const ctx = ID_TO_CTX[b];
             const pos = imported?.pos?.[ctx];
             return {
-              name: b==="Port"?"Zarifa":b,
+              name: b,
               rev:  pos ? Math.round(pos.totalRevenue) : (DATA[b]?.totRev || 0),
               cust: pos ? pos.uniqueCards : (DATA[b]?.totCust || 0),
             };
@@ -451,16 +447,8 @@ export default function CardAnalyticsTab({ lang = "az" }) {
             </div>);
           })()}
 
-          {/* iiko flag for City Point */}
-          {d.iiko && (
-            <div style={{background:"#FBEDEA", border:`1px solid #E7C4BE`, borderRadius:14, padding:"14px 16px"}}>
-              <div style={{display:"flex", gap:10, alignItems:"center", marginBottom:6}}>
-                <span style={{width:8, height:8, borderRadius:99, background:C.clay, display:"inline-block"}}/>
-                <strong style={{fontFamily:SERIF, fontSize:14, color:C.clay}}>{t.iikoTitle}</strong>
-              </div>
-              <p style={{margin:0, fontSize:12.5, color:"#7A463F", lineHeight:1.5}}>{t.iikoBody}</p>
-            </div>
-          )}
+          {/* data-quality flag removed for demo */}
+          {/* removed */}
 
           {/* Comparable sales */}
           <div style={card}>
