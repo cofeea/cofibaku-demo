@@ -404,7 +404,7 @@ export default function BusinessSimulatorTab({ lang = "az" }) {
           <strong style={{ color:C.gold }}>★ {lang==="az"?"Yeni ssenari — Cashback Proqramı":lang==="ru"?"Новый сценарий — программа кэшбэка":"New scenario — Cashback Program"}</strong>
           <span style={{ color:C.sub, marginLeft:8 }}>
             {lang==="az"?"Kapi Coffee-nin loyallıq kartından maksimum faydalanmaq üçün optimal cashback faizini tapın.":
-             lang==="ru"?"Найдите оптимальный % кэшбэка для Kapi Coffee Cofiesto.":
+             lang==="ru"?"Найдите оптимальный % кэшбэка для Kapi Coffee.":
              "Find the optimal cashback rate to maximise returns from Kapi Coffee's loyalty card program."}
           </span>
         </div>
