@@ -151,9 +151,9 @@ const ACTIONS = [
     title:{ az:"VIP müştəri qorunması", ru:"Защита VIP-клиентов", en:"VIP customer protection" },
     rev6mo_static:7167, difficulty:"easy", allBranches:true,
     dataInsight:{
-      az:(live)=>live?`${live.vipCount?.toLocaleString()||"596"} VIP kart gəlirin böyük hissəsini daşıyır. 10% churn azalması əhəmiyyətli gəliri qoruyur.`:"Zarifa filialında 596 VIP kart (5.3%) gəlirin 23.3%-ni gətirir.",
-      ru:(live)=>live?`${live.vipCount?.toLocaleString()||"596"} VIP-карт несут значительную долю выручки.`:"В Zarifa 596 VIP-карт (5,3%) дают 23,3% выручки.",
-      en:(live)=>live?`${live.vipCount?.toLocaleString()||"596"} VIP cards carry a large share of revenue. A 10% churn reduction protects significant revenue.`:"Zarifa has 596 VIP cards (5.3%) generating 23.3% of revenue.",
+      az:(live)=>live?`${live.vipCount?.toLocaleString()||"596"} VIP kart gəlirin böyük hissəsini daşıyır. 10% churn azalması əhəmiyyətli gəliri qoruyur.`:"İçərişəhər filialında 596 VIP kart (5.3%) gəlirin 23.3%-ni gətirir.",
+      ru:(live)=>live?`${live.vipCount?.toLocaleString()||"596"} VIP-карт несут значительную долю выручки.`:"В İçərişəhər 596 VIP-карт (5,3%) дают 23,3% выручки.",
+      en:(live)=>live?`${live.vipCount?.toLocaleString()||"596"} VIP cards carry a large share of revenue. A 10% churn reduction protects significant revenue.`:"İçərişəhər has 596 VIP cards (5.3%) generating 23.3% of revenue.",
     },
     action:{ az:"VIP kartları tanı. Kassir onları ad ilə salamlasın. Ayda bir 'teşekkür' mesajı.", ru:"Узнавай VIP-карты. Кассир здоровается по имени. Ежемесячное «спасибо».", en:"Recognise VIP cards. Cashier greets by name. Monthly 'thank you' message." },
     steps:{ az:["VIP kart siyahısı al","Kassir ekranına 'VIP' qeydi","Aylıq WhatsApp","Yeni məhsulda VIP-lərə əvvəl xəbər ver"], ru:["Список VIP-карт","Пометь «VIP» на кассе","Ежемесячный WhatsApp","VIP узнают о новинке первыми"], en:["Pull VIP card list","Flag 'VIP' on cashier screen","Monthly WhatsApp","VIPs get 24h advance notice"] },
