@@ -1,7 +1,6 @@
 // app/api/coach/route.js
 // AI business coach for Kapi Coffee. Uses OpenAI GPT-4o.
-ko P&L)
-// and grounds every answer in those real numbers.
+// Receives the dashboard live data summary and grounds every answer in those real numbers.
 
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
