@@ -546,7 +546,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
           <div style={{
             fontSize: 38, fontWeight: 600, letterSpacing: ".12em", color: "#1B3A6B", lineHeight: 1.05, marginTop: 6,
             textShadow: `0 2px 8px rgba(27,58,107,0.25)`,
-          }}>☕ CoffeeAnalytics</div>
+          }}>☕ Kapi Coffee</div>
           <div style={{
             height: 5, width: 230, marginTop: 10, borderRadius: 3,
             background: `linear-gradient(90deg, #1B3A6B, #CDA04B 60%, #1B3A6B)`, boxShadow: `0 0 14px rgba(27,58,107,0.3)`,
@@ -986,7 +986,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
 
       {/* footer */}
       <div style={{ textAlign: "center", fontSize: 11, color: C.inkSoft, marginTop: 18, letterSpacing: ".04em" }}>
-        ☕ CoffeeAnalytics · Baku · {t.footer_data}
+        ☕ Kapi Coffee · Baku · {t.footer_data}
         <span style={{ margin: "0 8px", opacity: 0.5 }}>·</span>
         <button
           onClick={async () => { await fetch("/api/logout", { method: "POST" }); window.location.reload(); }}
