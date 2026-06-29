@@ -437,7 +437,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
   const coachDataSummary = useMemo(() => {
     const lines = [];
     const live = dashboardData?.hasData;
-    lines.push(`Latest month: ${typeof CURRENT_MONTH==="object" ? CURRENT_MONTH.en : CURRENT_MONTH}. Data source: ${live ? "imported POS + iiko P&L" : "baseline estimates"}.`);
+    lines.push(`Latest month: ${typeof CURRENT_MONTH==="object" ? CURRENT_MONTH.en : CURRENT_MONTH}. Data source: ${live ? "imported data" : "sample data"}.`);
     lines.push("Per-branch (latest month P&L): " + BRANCHES.map(b =>
       `${b.name}: revenue ₼${Math.round(b.may.revenue).toLocaleString()}, net ₼${Math.round(b.may.net).toLocaleString()} (${b.ratiosMay.net}%), labor ${b.ratiosMay.labor}%, rent ${b.ratiosMay.rent}%, COGS ${b.ratiosMay.cogs}%, avg ticket ₼${b.avgTicket}, clients ${b.may.clients}`
     ).join(" | "));
