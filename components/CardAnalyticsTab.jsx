@@ -122,7 +122,7 @@ const MONTH_ABBR = {
 };
 
 // map dashboard branch ids ↔ DataContext branch names
-const ID_TO_CTX = { ADY:"ADY", "City Point":"City Point", "Central Park":"Central Park", Port:"Zarifa (Port)" };
+const ID_TO_CTX = { icerisheher:"İçərişəhər", nizami:"Nizami", bineqedi:"Binəqədi" };
 
 // "Nov 2025" → "2025-11"
 function labelToKey(label) {
@@ -298,8 +298,8 @@ export default function CardAnalyticsTab({ lang = "az" }) {
   const BANK_COLORS = {ABB:C.caramel, Kapital:C.green, "Paşa":C.slate};
 
   const branches = (() => {
-    const order = ["ADY", "City Point", "Central Park", "Port"];
-    const labelOf = (id) => id === "Port" ? "Zarifa (Port)" : id;
+    const order = ["icerisheher", "nizami", "bineqedi"];
+    const labelOf = (id) => ({ icerisheher:"İçərişəhər", nizami:"Nizami", bineqedi:"Binəqədi" }[id] || id);
     let ids;
     if (imported) {
       // only branches that actually have POS data
@@ -307,9 +307,9 @@ export default function CardAnalyticsTab({ lang = "az" }) {
         const p = imported.pos?.[ID_TO_CTX[id]];
         return p && (p.totalRevenue || p.monthly?.length);
       });
-      if (!ids.length) ids = ["ADY", "City Point", "Port"];
+      if (!ids.length) ids = ["icerisheher", "nizami", "bineqedi"];
     } else {
-      ids = ["ADY", "City Point", "Port"];   // static fallback (no Central Park data)
+      ids = ["icerisheher", "nizami", "bineqedi"];   // static fallback (no Central Park data)
     }
     return [...ids.map(id => ({ id, label: labelOf(id) })), { id: "__net", label: t.network }];
   })();
