@@ -47,7 +47,7 @@ const EVENT_EST = {
 };
 
 const BSHORT = {
-  "İçərişəhər":"Zarifa", "Nizami":"C.Park",
+  "İçərişəhər":"İçərişəhər", "Nizami":"Nizami",
   "Binəqədi":"C.Point",  "Binəqədi":"Binəqədi",
 };
 
@@ -301,7 +301,7 @@ export default function RevenuePlaybookTab({ lang = "az" }) {
     const m = {
       az: isStorm ? `⛈️ Fırtına — Nizami trafiki əhəmiyyətli düşəcək` :
           isRain  ? `🌧️ Yağış — Nizami gün içi trafiki azalacaq` :
-          isHot   ? `☀️ ${temp}°C istilik — park trafiki azalır, Zarifa stabil` :
+          isHot   ? `☀️ ${temp}°C istilik — xarici trafik azalır, İçərişəhər stabil` :
           isCold  ? `🥶 Soyuq — Nizami trafiki aşağı` :
           `🌤️ ${temp}°C mülayim — Nizami üçün əla şərait`,
       ru: isStorm ? `⛈️ Гроза — посещаемость Nizami резко упадёт` :
@@ -311,7 +311,7 @@ export default function RevenuePlaybookTab({ lang = "az" }) {
           `🌤️ ${temp}°C мягко — отличные условия для Nizami`,
       en: isStorm ? `⛈️ Storm — Nizami footfall will drop sharply` :
           isRain  ? `🌧️ Rain — Nizami daytime traffic will be lower` :
-          isHot   ? `☀️ ${temp}°C heat — park traffic drops, Zarifa stable` :
+          isHot   ? `☀️ ${temp}°C heat — outdoor traffic drops, İçərişəhər stable` :
           isCold  ? `🥶 Cold — Nizami traffic low` :
           `🌤️ ${temp}°C mild — great conditions for Nizami`,
     };
