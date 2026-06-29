@@ -1,44 +1,33 @@
 "use client";
-import { signIn, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const C = {
-  bg:"#F6F2E9", ink:"#2A251E", sub:"#6E6457",
-  gold:"#CDA04B", caramel:"#BE7A3C", line:"#E3DBCB", panel:"#FBF8F1",
+  bg:"#EAE6DF", ink:"#1A2D4A", sub:"#5B6D8A",
+  gold:"#CDA04B", caramel:"#BE7A3C", line:"#D4CFC5", panel:"#F7F4EE",
+  navy:"#1B3A6B",
 };
 const SERIF = "var(--brand-serif, Georgia), serif";
 const SANS  = "var(--brand-sans, system-ui, sans-serif)";
 
 const FEATURES = [
-  { icon:"📊", az:"7 aylıq P&L analizi",         en:"7-month P&L analysis" },
-  { icon:"💳", az:"Kart & müştəri analitikası",   en:"Card & customer analytics" },
-  { icon:"🗓️", az:"F1, bayram, hava proqnozu",    en:"F1, holidays, weather forecast" },
-  { icon:"🧠", az:"AI Coach (AZ/RU/EN)",          en:"AI Coach (AZ/RU/EN)" },
-  { icon:"📈", az:"Gəlir Playboku + Simulator",   en:"Revenue Playbook + Simulator" },
-  { icon:"📂", az:"Öz datasını yüklə — 2 dəq",   en:"Import your data — 2 min" },
+  { icon:"📊", az:"7 aylıq P&L analizi",        en:"7-month P&L analysis" },
+  { icon:"💳", az:"Kart & müştəri analitikası",  en:"Card & customer analytics" },
+  { icon:"🗓️", az:"F1, bayram, hava proqnozu",   en:"F1, holidays, weather forecast" },
+  { icon:"🧠", az:"AI Coach (AZ/RU/EN)",         en:"AI Coach (AZ/RU/EN)" },
+  { icon:"📈", az:"Gəlir Playboku + Simulator",  en:"Revenue Playbook + Simulator" },
+  { icon:"📂", az:"Öz datasını yüklə — 2 dəq",  en:"Import your data — 2 min" },
 ];
 
 export default function LandingPage() {
-  const { data:session, status } = useSession();
   const router = useRouter();
   const [lang, setLang] = useState("az");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (status === "authenticated") router.push("/dashboard");
-  }, [status, router]);
-
-  const handleSignIn = async () => {
+  const handleEnter = () => {
     setLoading(true);
-    await signIn("google", { callbackUrl: "/dashboard" });
+    router.push("/dashboard");
   };
-
-  if (status === "loading") return (
-    <div style={{ display:"flex", alignItems:"center", justifyContent:"center", minHeight:"100vh", background:C.bg, fontFamily:SANS }}>
-      <div style={{ fontSize:14, color:C.sub }}>Yüklənir...</div>
-    </div>
-  );
 
   return (
     <div style={{ minHeight:"100vh", background:C.bg, fontFamily:SANS, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"24px 16px" }}>
@@ -48,8 +37,8 @@ export default function LandingPage() {
         {["az","en"].map(l => (
           <button key={l} onClick={()=>setLang(l)} style={{
             fontSize:11, padding:"4px 10px", borderRadius:999, cursor:"pointer",
-            border:`1px solid ${lang===l?C.caramel:C.line}`,
-            background:lang===l?C.caramel:"transparent",
+            border:`1px solid ${lang===l?C.navy:C.line}`,
+            background:lang===l?C.navy:"transparent",
             color:lang===l?"#fff":C.sub, fontWeight:600,
           }}>{l.toUpperCase()}</button>
         ))}
@@ -60,13 +49,13 @@ export default function LandingPage() {
 
         {/* Logo */}
         <div style={{ fontSize:36, marginBottom:8 }}>☕</div>
-        <div style={{ fontFamily:SERIF, fontSize:28, fontWeight:600, color:C.ink, marginBottom:6 }}>
-          CofiBakuPromo
+        <div style={{ fontFamily:SERIF, fontSize:28, fontWeight:600, color:C.navy, marginBottom:6 }}>
+          Kapi Coffee
         </div>
         <div style={{ fontSize:13, color:C.sub, marginBottom:28, lineHeight:1.5 }}>
           {lang==="az"
-            ? "Bakı qəhvəxanaları üçün AI-dəstəkli analitika · Nümunə demo"
-            : "AI-powered analytics for Baku coffee shops · Sample demo"}
+            ? "Bakı qəhvəxanaları üçün AI-dəstəkli analitika · Demo versiya"
+            : "AI-powered analytics for Baku coffee shops · Demo version"}
         </div>
 
         {/* Feature pills */}
@@ -79,32 +68,22 @@ export default function LandingPage() {
           ))}
         </div>
 
-        {/* Sign in button */}
-        <button onClick={handleSignIn} disabled={loading} style={{
+        {/* Enter button */}
+        <button onClick={handleEnter} disabled={loading} style={{
           display:"flex", alignItems:"center", justifyContent:"center", gap:10,
           width:"100%", padding:"13px 20px", borderRadius:12, cursor:loading?"not-allowed":"pointer",
-          background:loading?C.line:C.ink, color:"#fff", border:"none",
+          background:loading?C.line:C.navy, color:"#fff", border:"none",
           fontSize:14, fontWeight:600, transition:"background .2s",
         }}>
-          {loading ? (
-            <span>{lang==="az"?"Yönləndirilir...":"Redirecting..."}</span>
-          ) : (
-            <>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-              </svg>
-              {lang==="az"?"Google ilə daxil ol":"Sign in with Google"}
-            </>
-          )}
+          {loading
+            ? (lang==="az"?"Açılır...":"Opening...")
+            : (lang==="az"?"Demo dashboarda keç →":"Open demo dashboard →")}
         </button>
 
         <div style={{ marginTop:16, fontSize:11, color:C.sub, lineHeight:1.6 }}>
           {lang==="az"
-            ? "Daxil olduqdan sonra hazır nümunə data ilə bütün analitika tabları açılır. Öz fayllarını da yükləyə bilərsən."
-            : "After signing in, all analytics tabs open with pre-loaded sample data. You can also import your own files."}
+            ? "Hazır nümunə data ilə bütün analitika tabları açılır. Öz fayllarını da yükləyə bilərsən."
+            : "All analytics tabs open with pre-loaded sample data. You can also import your own files."}
         </div>
       </div>
 
