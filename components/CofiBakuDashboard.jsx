@@ -1,6 +1,5 @@
 // @ts-nocheck
 "use client";
-import { signOut } from "next-auth/react";
 
 import { useState, useRef, useEffect, useMemo } from "react";
 import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
@@ -1009,13 +1008,7 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
       {/* footer */}
       <div style={{ textAlign: "center", fontSize: 11, color: C.inkSoft, marginTop: 18, letterSpacing: ".04em" }}>
         ☕ Kapi Coffee · Baku · {t.footer_data}
-        <span style={{ margin: "0 8px", opacity: 0.5 }}>·</span>
-        <button
-          onClick={async () => { await fetch("/api/logout", { method: "POST" }); window.location.reload(); }}
-          style={{ background: "none", border: "none", color: C.inkSoft, cursor: "pointer", fontSize: 11, textDecoration: "underline", padding: 0, letterSpacing: ".04em" }}
-        >
-          {t.sign_out}
-        </button>
+
       </div>
     </div>
   );
