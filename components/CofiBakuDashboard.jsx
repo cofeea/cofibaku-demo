@@ -555,11 +555,9 @@ export default function CofiBakuDashboard({ user = null, staticData = staticData
       }}>
         <span style={{ fontSize: 16, flexShrink: 0 }}>🎯</span>
         <span>
-          {{
-            az: <><strong>Demo versiya</strong> — məlumatlar və biznes konteksti sizin şirkətinizə uyğunlaşdırılacaq.</>,
-            ru: <><strong>Демо-версия</strong> — данные и бизнес-контекст будут адаптированы под вашу компанию.</>,
-            en: <><strong>Demo version</strong> — data and business context will be customised for your company.</>,
-          }}[lang]}
+          {lang === "az" ? <><strong>Demo versiya</strong> — məlumatlar və biznes konteksti sizin şirkətinizə uyğunlaşdırılacaq.</> :
+           lang === "ru" ? <><strong>Демо-версия</strong> — данные и бизнес-контекст будут адаптированы под вашу компанию.</> :
+           <><strong>Demo version</strong> — data and business context will be customised for your company.</>}
         </span>
       </div>
 
